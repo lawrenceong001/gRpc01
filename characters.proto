@@ -1,0 +1,29 @@
+syntax = "proto3";
+option csharp_namespace="gRpc01";
+
+package KidsCharacters;
+
+service Characters{
+	rpc GetCharacter (CharacterRequest) returns (CharacterResponse);
+
+	rpc SearchCharacters(SearchRequest) returns (stream CharacterResponse);
+}
+
+message Character{
+	int32 Id=1;
+	string FirstName = 2;
+	string LastName=3;
+	string Show=4;
+}
+
+message CharacterRequest{
+	int32 id=1;
+}
+
+message CharacterResponse{
+	Character character =1;
+}
+
+message SearchRequest{
+	string query =1;
+}

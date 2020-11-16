@@ -34,5 +34,16 @@ namespace gRpc01.Server
 				await Task.Delay(1000);
 			}
 		}
+
+		public override async Task<SumResponse> DoSum(IAsyncStreamReader<SumRequest> requestStream, ServerCallContext context)
+		{
+			int count = 0;
+			await foreach(var request in requestStream.ReadAllAsync())
+			{
+				count += request.Value;
+				Console.WriteLine($"received number {request.Value}. Total is {count}");
+			}
+			return new SumResponse { Total = count };
+		}
 	}
 }

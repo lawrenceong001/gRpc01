@@ -7,6 +7,8 @@ service Characters{
 	rpc GetCharacter (CharacterRequest) returns (CharacterResponse);
 
 	rpc SearchCharacters(SearchRequest) returns (stream CharacterResponse);
+
+	rpc DoSum (stream SumRequest) returns (SumResponse);
 }
 
 message Character{
@@ -26,4 +28,10 @@ message CharacterResponse{
 
 message SearchRequest{
 	string query =1;
+}
+
+message SumRequest{ int32 value=1;}
+
+message SumResponse {
+	int32 total =1;
 }
